@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt") // Kotlin annotation processing
+    id("com.google.dagger.hilt.android") // DaggerHilt
 }
 
 android {
@@ -52,6 +54,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // LiveData : https://developer.android.com/topic/libraries/architecture/livedata
     implementation(libs.androidx.lifecycle.livedata.ktx) // LiveData
+
+    // DaggerHilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

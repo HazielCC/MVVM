@@ -10,7 +10,9 @@ import androidx.core.view.isVisible
 import com.coco.mvvm.R
 import com.coco.mvvm.databinding.ActivityMainBinding
 import com.coco.mvvm.ui.viewmodel.QuoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val quoteViewModel: QuoteViewModel by viewModels()
@@ -37,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         quoteViewModel.onCreate()
 
         quoteViewModel.quoteModel.observe(this) {
-            binding.tvQuote.text = it.quote
-            binding.tvAutor.text = it.author
+            binding.tvQuote.text = it?.quote ?: ""
+            binding.tvAutor.text = it?.author ?: ""
         }
 
         quoteViewModel.isLoading.observe(this) {

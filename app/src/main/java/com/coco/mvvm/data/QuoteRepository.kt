@@ -3,13 +3,15 @@ package com.coco.mvvm.data
 import com.coco.mvvm.data.api.QuoteApiService
 import com.coco.mvvm.data.model.QuoteModel
 import com.coco.mvvm.data.model.QuoteProvider
+import javax.inject.Inject
 
-class QuoteRepository {
-    private val quoteService = QuoteApiService()
-
+class QuoteRepository @Inject constructor(
+    private val quoteService: QuoteApiService,
+    private val quoteProvider: QuoteProvider
+) {
     suspend fun getAllQuotes(): List<QuoteModel> {
         val response = quoteService.getQuoteService()
-        QuoteProvider.quotes = response
+        quoteProvider.quotes = response
         return response
     }
 }

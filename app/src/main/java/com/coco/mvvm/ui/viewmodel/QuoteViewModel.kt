@@ -6,15 +6,18 @@ import androidx.lifecycle.viewModelScope
 import com.coco.mvvm.data.model.QuoteModel
 import com.coco.mvvm.domain.GetQuouteUseCase
 import com.coco.mvvm.domain.GetRandomQuoteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class QuoteViewModel : ViewModel() {
+@HiltViewModel
+class QuoteViewModel @Inject constructor(
+    private val getQuoteUseCase: GetQuouteUseCase,
+    private val getRandomQuoteUseCase: GetRandomQuoteUseCase
+) : ViewModel() {
     // LiveData object to hold the quote
-    val quoteModel = MutableLiveData<QuoteModel>()
+    val quoteModel = MutableLiveData<QuoteModel?>()
     val isLoading = MutableLiveData<Boolean>()
-
-    var getQuoteUseCase = GetQuouteUseCase()
-    var getRandomQuoteUseCase = GetRandomQuoteUseCase()
 
     fun onCreate() {
         viewModelScope.launch {

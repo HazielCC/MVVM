@@ -1,28 +1,10 @@
 package com.coco.mvvm.core
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-
-
+/*
 object API {
     // Instancia de Retrofit
     @Volatile
     private var retrofit: Retrofit? = null
-
-    // Verificación de disponibilidad de red
-    private fun Context.isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork
-        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
-        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
-    }
 
     // Obtener instancia de Retrofit
     fun getRetrofit(): Retrofit {
@@ -47,4 +29,4 @@ object API {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-}
+}*/
