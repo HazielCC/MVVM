@@ -40,6 +40,12 @@ android {
 }
 
 dependencies {
+    // Retrofit
+    implementation(libs.retrofit) // Retrofit
+    implementation(libs.converter.gson) // Gson Converter
+    implementation(libs.logging.interceptor) // Interceptor
+    //Corrutinas
+    implementation(libs.kotlinx.coroutines.android) // Corrutinas
 
     // Life Cycle Components
     // ViewModel : https://developer.android.com/topic/libraries/architecture/viewmodel

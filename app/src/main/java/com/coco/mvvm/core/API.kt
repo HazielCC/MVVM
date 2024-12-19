@@ -1,9 +1,8 @@
-package androidearly.utilities.services
+package com.coco.mvvm.core
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidearly.utilities.dialogs.MessageDialog
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,10 +11,12 @@ import java.util.concurrent.TimeUnit
 
 
 object API {
-    // Crear una instancia de androidearly.utilities.dialogs.MessageDialog
-    private val messageDialog = MessageDialog()
+    // Instancia de Retrofit
+    @Volatile
+    private var retrofit: Retrofit? = null
 
-    fun Context.isNetworkAvailable(): Boolean {
+    // Verificación de disponibilidad de red
+    private fun Context.isNetworkAvailable(): Boolean {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork
@@ -23,30 +24,27 @@ object API {
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
     }
 
-    // Retrofit
-    fun Context.getRetrofit(): Retrofit {
-        if (!isNetworkAvailable()) {
-            // Handle the case when there is no network available
-            // For example, you can throw an exception or return null
-            messageDialog.showInternetErrorMessage(this)
-        }
+    // Obtener instancia de Retrofit
+    fun getRetrofit(): Retrofit {
+        return retrofit ?: synchronized(this) { retrofit ?: buildRetrofit().also { retrofit = it } }
+    }
 
-        // Logging interceptor
-        val logging = HttpLoggingInterceptor() // logging interceptor
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY) // logging level
+    // Construcción de Retrofit
+    private fun buildRetrofit(): Retrofit { // Logging interceptor
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(logging) // petition logging
-            .connectTimeout(30, TimeUnit.SECONDS) // connection timeout
-            .readTimeout(30, TimeUnit.SECONDS) // read timeout
-            .writeTimeout(30, TimeUnit.SECONDS) // write timeout
+            .addInterceptor(logging)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://superheroapi.com/api/")
+            .baseUrl("https://qapi.vercel.app/api/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
 }

@@ -1,4 +1,4 @@
-package com.coco.mvvm.view
+package com.coco.mvvm.ui.view
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -6,9 +6,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.coco.mvvm.R
 import com.coco.mvvm.databinding.ActivityMainBinding
-import com.coco.mvvm.viewmodel.QuoteViewModel
+import com.coco.mvvm.ui.viewmodel.QuoteViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,9 +34,15 @@ class MainActivity : AppCompatActivity() {
     private fun initUI() {
         setOnClickListeners()
 
-        quoteViewModel.quoteProvider.observe(this) {
+        quoteViewModel.onCreate()
+
+        quoteViewModel.quoteModel.observe(this) {
             binding.tvQuote.text = it.quote
             binding.tvAutor.text = it.author
+        }
+
+        quoteViewModel.isLoading.observe(this) {
+            binding.pbLoading.isVisible = it
         }
     }
 
