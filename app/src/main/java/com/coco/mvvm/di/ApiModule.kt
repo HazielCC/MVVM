@@ -1,4 +1,4 @@
-package com.coco.mvvm.core
+package com.coco.mvvm.di
 
 import com.coco.mvvm.data.api.QuoteApiClient
 import dagger.Module

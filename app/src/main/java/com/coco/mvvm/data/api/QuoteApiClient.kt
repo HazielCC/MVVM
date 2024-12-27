@@ -4,6 +4,7 @@ import com.coco.mvvm.data.model.QuoteModel
 import retrofit2.Response
 import retrofit2.http.GET
 
+// Interface que define la petición GET para obtener todas las citas
 interface QuoteApiClient {
     @GET("quotes")
     suspend fun getAllQuote(): Response<List<QuoteModel>>

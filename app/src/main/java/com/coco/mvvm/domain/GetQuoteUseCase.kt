@@ -5,7 +5,7 @@ import com.coco.mvvm.data.database.entities.toDataBase
 import com.coco.mvvm.domain.model.Quote
 import javax.inject.Inject
 
-class GetQuouteUseCase @Inject constructor(
+class GetQuoteUseCase @Inject constructor(
     private val quoteRepository: QuoteRepository
 ) {
     suspend operator fun invoke(): List<Quote> {

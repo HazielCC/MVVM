@@ -1,14 +1,15 @@
 package com.coco.mvvm.domain
 
-import com.coco.mvvm.data.model.QuoteModel
-import com.coco.mvvm.data.model.QuoteProvider
+import com.coco.mvvm.data.QuoteRepository
+import com.coco.mvvm.domain.model.Quote
 import javax.inject.Inject
 
+// UseCase para obtener una cita aleatoria
 class GetRandomQuoteUseCase @Inject constructor(
-    private val quoteProvider: QuoteProvider
+    private val quoteRepository: QuoteRepository
 ) {
-    operator fun invoke(): QuoteModel? {
-        val quotes: List<QuoteModel> = quoteProvider.quotes
+    suspend operator fun invoke(): Quote? {
+        val quotes: List<Quote> = quoteRepository.getAllQuotesFromDb()
         if (quotes.isNotEmpty()) {
             val random = quotes.indices.random()
             return quotes[random]
