@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class QuoteRepository @Inject constructor(
     private val quoteService: QuoteApiService,
-    //private val quoteProvider: QuoteProvider
     private val quoteDao: QuoteDao
 ) {
     // From the API
