@@ -50,9 +50,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android) // Corrutinas
 
     // Life Cycle Components
-    // ViewModel : https://developer.android.com/topic/libraries/architecture/viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    // LiveData : https://developer.android.com/topic/libraries/architecture/livedata
     implementation(libs.androidx.lifecycle.livedata.ktx) // LiveData
 
     // DaggerHilt
@@ -68,7 +66,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
