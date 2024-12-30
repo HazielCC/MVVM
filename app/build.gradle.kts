@@ -78,8 +78,8 @@ dependencies {
     // Dependencias para pruebas
     testImplementation(libs.junit) // JUnit para pruebas unitarias.
     testImplementation(libs.mockk) // MockK para mocks en Kotlin.
+    testImplementation(libs.kotlinx.coroutines.test) // MockK para mocks en Kotlin.
     testImplementation(libs.androidx.core.testing) // Biblioteca de pruebas core para Android.
     androidTestImplementation(libs.androidx.junit) // JUnit para pruebas de instrumentación.
     androidTestImplementation(libs.androidx.espresso.core) // Espresso para pruebas de UI.
-
 }
